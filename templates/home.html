@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .logout-button {
+            background-color: red;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .logout-button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Добро пожаловать в строительный магазин!</h1>
+        <div class="menu">
+            {% if session.get('user_id') %}
+                <p><a class="button" href="{{ url_for('products') }}">Посмотреть продукты</a></p>
+                <p><a class="button" href="{{ url_for('about') }}">О нас</a></p>
+                <p><a class="button" href="{{ url_for('profile') }}">Личный кабинет</a></p>
+                <a href="{{ url_for('logout') }}" class="logout-button">Выйти</a>
+            {% else %}
+                <p>
+                    <a class="button button-blue" href="{{ url_for('login') }}">Войти</a>
+                    <a class="button" href="{{ url_for('register') }}">Регистрация</a>
+                </p>
+            {% endif %}
+        </div>
+
+        <div class="image-container">
+            <img src="https://cdn1.flamp.ru/701cfbf1c1ebb7d4ed5fcb0ec4a705e2.jpg" alt="Описание изображения">
+        </div>
+    </div>
+</body>
+</html>

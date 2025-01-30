@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить продукт</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Строй.IT</div>
+        </div>
+    </header>
+
+    <main>
+        <h1>Добавить продукт</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Имя продукта" required>
+            <input type="text" name="description" placeholder="Описание" required>
+            <input type="number" name="price" placeholder="Цена" step="0.01" required>
+            <input type="file" name="image" required>
+            <button type="submit">Добавить продукт</button>
+        </form>
+        <a href="{{ url_for('products') }}">Назад к продуктам</a>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Строй.IT. Все пользовательские права защищены.</p>
+    </footer>
+</body>
+</html>

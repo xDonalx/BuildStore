@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Продукты</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/products_style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">Строй.IT</div>
+            <nav>
+                <ul class="menu">
+                    <li><a href="{{ url_for('home') }}" class="nav-button">Главная</a></li>
+                    <li><a href="{{ url_for('about') }}" class="nav-button">О нас</a></li>
+                    <li><a href="{{ url_for('add_product') }}" class="nav-button">Добавить продукт</a></li>
+                    <li><a href="{{ url_for('profile') }}" class="nav-button">Личный кабинет</a></li>
+                    <li><a href="{{ url_for('view_cart') }}" class="nav-button">Корзина</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Доступные продукты</h1>
+        <div class="product-list">
+            {% for product in products %}
+                <div class="product-item">
+                    <div class="product-icon">
+                        <img src="{{ url_for('static', filename='images/' ~ product.image) }}" alt="{{ product.name }}" style="width: 100%; height: auto;">
+                    </div>
+                    <div class="product-info">
+                        <a href="{{ url_for('product_detail', product_id=product.id) }}">{{ product.name }}</a>
+                        <p>{{ product.price }} руб.</p>
+                        <div class="quantity-container">
+                            <input type="number" id="quantity-{{ product.id }}" min="1" value="1" />
+                            <button onclick="addToCart({{ product.id }})" class="buy-button">Добавить в корзину</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 Строй.IT. Все пользовательские права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        function addToCart(productId) {
+            const quantity = document.getElementById(`quantity-${productId}`).value;
+            window.location.href = `/add_to_cart/${productId}?quantity=${quantity}`;
+        }
+    </script>
+</body>
+</html>

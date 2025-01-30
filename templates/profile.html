@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Личный кабинет</h1>
+        <a href="{{ url_for('home') }}" class="button">На главную</a>
+        <form method="post" enctype="multipart/form-data">
+            <div>
+                <label for="avatar">Аватар:</label>
+                {% if user.profile_picture %}
+                    <img src="{{ url_for('static', filename='images/' ~ user.profile_picture) }}" alt="Avatar" style="width: 100px; height: auto;">
+                {% endif %}
+                <input type="file" name="avatar" id="avatar" placeholder="Загрузить аватар">
+            </div>
+            <div>
+                <label for="first_name">Имя:</label>
+                <input type="text" name="first_name" id="first_name" value="{{ user.first_name }}" required>
+            </div>
+            <div>
+                <label for="last_name">Фамилия:</label>
+                <input type="text" name="last_name" id="last_name" value="{{ user.last_name }}" required>
+            </div>
+            <div>
+                <label for="patronymic">Отчество:</label>
+                <input type="text" name="patronymic" id="patronymic" value="{{ user.patronymic }}">
+            </div>
+            <div>
+                <label for="address">Адрес:</label>
+                <input type="text" name="address" id="address" value="{{ user.address }}">
+            </div>
+            <div>
+                <label for="phone_number">Номер телефона:</label>
+                <input type="text" name="phone_number" id="phone_number" value="{{ user.phone_number }}">
+            </div>
+            <div>
+                <label for="about_me">О себе:</label>
+                <textarea name="about_me" id="about_me">{{ user.about_me }}</textarea>
+            </div>
+            <button type="submit">Сохранить изменения</button>
+        </form>
+    </div>
+</body>
+</html>
